@@ -13,6 +13,9 @@ BEGIN
         THEN
             RAISE EXCEPTION 'Conflit dans la reservation : L interval de temps choisi chevauche une reservation existante.';
         END IF;
+        IF (NEW.date_fin - NEW.date_debut) > INTERVAL '4 hours' THEN
+            RAISE EXCEPTION 'La durée de réservation doit être inférieure ou égale à 4 heures.';
+        END IF;
 
         INSERT INTO log(id_log, description, date, id_reservation, cip)
         VALUES(DEFAULT, 'Reservation creee', CURRENT_DATE, new.id_reservation, new.cip);
@@ -29,6 +32,9 @@ BEGIN
             )
             THEN
             RAISE EXCEPTION 'Conflit dans la reservation : L interval de temps choisi chevauche une reservation existante.';
+            END IF;
+            IF (NEW.date_fin - NEW.date_debut) > INTERVAL '4 hours' THEN
+                RAISE EXCEPTION 'La durée de réservation doit être inférieure ou égale à 4 heures.';
             END IF;
 
             UPDATE log
@@ -48,7 +54,7 @@ CREATE OR REPLACE FUNCTION procedure_reservation_delete()
 BEGIN
     INSERT INTO log(id_log,description, date, cip, id_reservation)
         VALUES(DEFAULT,'Reservation annule', CURRENT_DATE, OLD.cip, OLD.id_reservation);
-    RETURN new;
+    RETURN old;
 END;
 $$ LANGUAGE plpgsql;
 
