@@ -83,8 +83,8 @@ CREATE TABLE MEMBRE
 CREATE TABLE RESERVATION
 (
     id_Reservation VARCHAR(128) NOT NULL,
-    Date_debut DATE NOT NULL,
-    Date_fin DATE NOT NULL,
+    Date_debut timestamp NOT NULL,
+    Date_fin timestamp NOT NULL,
     id_Locaux VARCHAR(32) NOT NULL,
     id_Pavillon VARCHAR(32) NOT NULL,
     Cip VARCHAR(16) NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE LOG
 (
     id_Log VARCHAR(32) NOT NULL,
     Description VARCHAR(1024) NOT NULL,
-    Date DATE NOT NULL,
+    Date timestamp NOT NULL,
     id_Reservation VARCHAR(128) NOT NULL,
     Cip VARCHAR(16) NOT NULL,
     PRIMARY KEY (id_Log),
