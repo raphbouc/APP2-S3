@@ -130,17 +130,15 @@ WITH horaire AS (
                     lf.id_pavillon = reservation.id_pavillon AND
                     lookup.heure + debut::date >= reservation.date_debut AND
                     lookup.heure + debut::date < reservation.date_fin
-
-
-
     WHERE
             lookup.heure >= debut::time AND
             lookup.heure <= fin::time
     ORDER BY
         lookup.heure, lf.id_locaux
 )
-SELECT * FROM horaire;
+SELECT * FROM horaire
+ORDER BY  id_locaux, heure;
 $$ LANGUAGE SQL;
 
 
-SELECT * FROM TABLEAU('2021-09-28 00:00:00','2021-09-28 23:45:00', 0126)
+SELECT * FROM TABLEAU('2021-09-28 00:00:00','2021-09-28 23:45:00', 0114)

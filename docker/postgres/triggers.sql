@@ -5,6 +5,7 @@ BEGIN
             SELECT 1
             FROM reservation res
             WHERE res.id_locaux = NEW.id_locaux
+                AND ((res.numcubicule = NEW.numcubicule) OR (res.numcubicule IS NULL AND NEW.numcubicule IS NULL))
                 AND res.date_debut < NEW.date_fin
                 AND res.date_fin > NEW.date_debut
                 AND res.id_reservation <> NEW.id_reservation
@@ -52,9 +53,9 @@ DROP TRIGGER IF EXISTS trigger_reservation_delete ON reservation;
 CREATE OR REPLACE FUNCTION procedure_reservation_delete()
     RETURNS TRIGGER AS $$
 BEGIN
-    INSERT INTO log(id_log,description, date, cip, id_reservation)
-        VALUES(DEFAULT,'Reservation annule', CURRENT_DATE, OLD.cip, OLD.id_reservation);
-    RETURN old;
+    INSERT INTO log(id_log,description, date, id_reservation, cip)
+        VALUES(DEFAULT,'Reservation annule', CURRENT_DATE, OLD.id_reservation, old.cip);
+    RETURN new;
 END;
 $$ LANGUAGE plpgsql;
 

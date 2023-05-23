@@ -79,6 +79,15 @@ CREATE TABLE MEMBRE
     FOREIGN KEY (id_Departement) REFERENCES DEPARTEMENT(id_Departement)
 );
 
+CREATE TABLE CUBICULE
+(
+    numCubicule INT NOT NULL,
+    id_Locaux VARCHAR(32) NOT NULL,
+    id_Pavillon VARCHAR(32) NOT NULL,
+    PRIMARY KEY (numCubicule, id_Locaux, id_Pavillon),
+    FOREIGN KEY (id_Locaux, id_Pavillon) REFERENCES LOCAL(id_Locaux, id_Pavillon)
+);
+
 CREATE TABLE RESERVATION
 (
     id_Reservation VARCHAR(128) NOT NULL,
@@ -88,7 +97,9 @@ CREATE TABLE RESERVATION
     id_Pavillon VARCHAR(32) NOT NULL,
     Cip VARCHAR(16) NOT NULL,
     Description VARCHAR(1024),
+    numCubicule INT,
     PRIMARY KEY (id_Reservation),
+    FOREIGN KEY (numCubicule, id_Locaux, id_Pavillon) REFERENCES CUBICULE(numCubicule, id_Locaux, id_Pavillon),
     FOREIGN KEY (id_Locaux, id_Pavillon) REFERENCES LOCAL(id_Locaux, id_Pavillon),
     FOREIGN KEY (Cip) REFERENCES MEMBRE(Cip)
 );
@@ -105,14 +116,6 @@ CREATE TABLE LOG
     FOREIGN KEY (id_Reservation) REFERENCES RESERVATION(id_Reservation)
 );
 
-CREATE TABLE CUBICULE
-(
-    numCubile INT NOT NULL,
-    id_Locaux VARCHAR(32) NOT NULL,
-    id_Pavillon VARCHAR(32) NOT NULL,
-    PRIMARY KEY (numCubile, id_Locaux, id_Pavillon),
-    FOREIGN KEY (id_Locaux, id_Pavillon) REFERENCES LOCAL(id_Locaux, id_Pavillon)
-);
 
 CREATE TABLE CaractLocal
 (
