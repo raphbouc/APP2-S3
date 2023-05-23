@@ -96,6 +96,7 @@ CREATE TABLE RESERVATION
     id_Locaux VARCHAR(32) NOT NULL,
     id_Pavillon VARCHAR(32) NOT NULL,
     Cip VARCHAR(16) NOT NULL,
+
     Description VARCHAR(1024),
     numCubicule INT,
     PRIMARY KEY (id_Reservation),
@@ -109,11 +110,12 @@ CREATE TABLE LOG
     id_Log SERIAL NOT NULL,
     Description VARCHAR(1024) NOT NULL,
     Date TIMESTAMP NOT NULL,
-    id_Reservation VARCHAR(128) NOT NULL,
+    id_Locaux VARCHAR(32) NOT NULL,
+    id_Pavillon VARCHAR(32) NOT NULL,
     Cip VARCHAR(16) NOT NULL,
     PRIMARY KEY (id_Log),
     FOREIGN KEY (Cip) REFERENCES MEMBRE(Cip),
-    FOREIGN KEY (id_Reservation) REFERENCES RESERVATION(id_Reservation)
+    FOREIGN KEY (id_Locaux, id_Pavillon) REFERENCES local(id_Locaux, id_pavillon)
 );
 
 
@@ -137,10 +139,9 @@ CREATE TABLE StatutMembre
     FOREIGN KEY (Cip) REFERENCES MEMBRE(Cip)
 );
 
-ALTER TABLE log
-    DROP CONSTRAINT log_id_reservation_fkey,
+ALTER TABLE LOG
     ADD CONSTRAINT log_id_reservation_fkey
-        FOREIGN KEY (id_Reservation)
-            REFERENCES reservation (id_Reservation)
+        FOREIGN KEY (id_Locaux, id_Pavillon)
+            REFERENCES LOCAL (id_Locaux, id_pavillon)
             ON DELETE CASCADE;
 
