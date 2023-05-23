@@ -54,7 +54,7 @@ INSERT INTO PAVILLON VALUES('D7', 'Centre universitaire de formation en environn
 INSERT INTO fonction VALUES (0110, 'Salle de classe générale');
 INSERT INTO fonction VALUES (0111, 'Salle de classe spécialisée');
 INSERT INTO fonction VALUES (0112, 'Salle de séminaire');
-INSERT INTO fonction VALUES (0113, 'Cubicules');
+INSERT INTO fonction VALUES (0113, 'Salle detude');
 INSERT INTO fonction VALUES (0114, 'Laboratoire informatique');
 INSERT INTO fonction VALUES (0115, 'Laboratoire denseignement spécialisé');
 INSERT INTO fonction VALUES (0116, 'Atelier');
@@ -66,11 +66,11 @@ INSERT INTO fonction VALUES (0121, 'Salle de conférence');
 INSERT INTO fonction VALUES (0123, 'Salle de réunion');
 INSERT INTO fonction VALUES (0124, 'Salle dentrevue et de tests');
 INSERT INTO fonction VALUES (0125, 'Salle de lecture ou de consultation');
-INSERT INTO fonction VALUES (0126, 'Auditorium');
+INSERT INTO fonction VALUES (0126, 'Studio denregistrement');
 INSERT INTO fonction VALUES (0127, 'Salle de concert');
 INSERT INTO fonction VALUES (0128, 'Salle daudience');
 INSERT INTO fonction VALUES (0129, 'Salon du personnel');
-INSERT INTO fonction VALUES (0130, 'Studio denregistrement');
+INSERT INTO fonction VALUES (0130, 'Auditorium');
 INSERT INTO fonction VALUES (0131, 'Hall dentrée');
 
 --Departement
@@ -81,14 +81,14 @@ INSERT INTO DEPARTEMENT VALUES (6994, 'GC','D7');
 
 
 --Local
-INSERT INTO LOCAL VALUES('C1', '1007', 21, 0110, 'Grand');
+INSERT INTO LOCAL VALUES('C1', '1007', 21, 0130, 'Grand');
 INSERT INTO LOCAL VALUES('C1', '2018', 10, 0111, 'Materiaux Composites');
 INSERT INTO LOCAL VALUES('C1', '3041', 50, 0112);
 INSERT INTO LOCAL VALUES('C1', '2055', 24, 0113);
 INSERT INTO LOCAL VALUES('C1', '3014', 25, 0114, 'Laboratoire mecatronique');
 INSERT INTO LOCAL VALUES('C1', '3027', 15, 0115, 'Petit laboratoire de elect');
 INSERT INTO LOCAL VALUES('C1', '3016', 50, 0116);
-INSERT INTO LOCAL VALUES('C1', '3018', 50, 0117);
+INSERT INTO LOCAL VALUES('C1', '3018', 50, 0130);
 INSERT INTO LOCAL VALUES('C1', '3024', 50, 0118);
 INSERT INTO LOCAL VALUES('C1', '3035', 50, 0119);
 INSERT INTO LOCAL VALUES('C1', '3007', 106, 0120, 'Avec console multi-media');
@@ -103,9 +103,9 @@ INSERT INTO LOCAL VALUES('C1', '4028', 14,0128);
 INSERT INTO LOCAL VALUES('C1', '4008', 106, 0129);
 INSERT INTO LOCAL VALUES('C1', '5012', 35, 0130, '3 cubicules');
 INSERT INTO LOCAL VALUES('C1', '5026', 38, 0131,'Ordinateurs');
-INSERT INTO LOCAL VALUES('D7', '2018', 57, 0123);
+INSERT INTO LOCAL VALUES('D7', '2018', 57, 0130);
 INSERT INTO LOCAL VALUES('D7', '3001', 35, 0111);
-INSERT INTO LOCAL VALUES('D7', '3002', 22, 0113);
+INSERT INTO LOCAL VALUES('D7', '3002', 22, 0130);
 INSERT INTO LOCAL VALUES('D7', '3007', 54, 0114);
 INSERT INTO LOCAL VALUES('D7', '3009', 45,0115);
 INSERT INTO LOCAL VALUES('D7', '3010', 21,0116);
@@ -170,7 +170,7 @@ INSERT INTO CUBICULE VALUES(3, '5012', 'C1');
 --Membre
 INSERT INTO MEMBRE VALUES('guea0902', 'Guerard', 'Alexis', 2045);
 INSERT INTO MEMBRE VALUES('bour0703', 'Bouchard', 'Raphael', 3698);
-INSERT INTO MEMBRE VALUES('beab1234', 'Beaulieu', 'Bernard', 2045);
+INSERT INTO MEMBRE VALUES('beab1234', 'LeMeilleur<3', 'Bernard', 2045);
 INSERT INTO MEMBRE VALUES('admi1234', 'User', 'Admin', 6994);
 
 --Status
@@ -190,18 +190,28 @@ INSERT INTO STATUT_Privilege VALUES('Reservez en tout temps' ,2);
 INSERT INTO STATUT_Privilege VALUES('Annuler reservation' ,3);
 
 --Reservation
-INSERT INTO RESERVATION VALUES (1,'2021-09-28 08:00:00','2021-09-28 10:00:00','1007','C1','guea0902','Net Neutrality');
-INSERT INTO RESERVATION VALUES (2,'2021-09-29 08:00:00','2021-09-29 10:00:00','1007','C1','guea0902','Net Neutrality');
-INSERT INTO RESERVATION VALUES (3,'2021-09-28 08:30:00','2021-09-28 10:00:00','2018','C1','bour0703','Big Data');
-INSERT INTO RESERVATION VALUES (4,'2021-09-28 09:00:00','2021-09-28 10:00:00','2055','C1','admi1234','Data Mining');
-INSERT INTO RESERVATION VALUES (5,'2021-09-28 10:00:00','2021-09-28 12:00:00','3014','C1','admi1234','Actionable Analytics');
-INSERT INTO RESERVATION VALUES (6,'2021-09-28 11:00:00','2021-09-28 15:00:00','4019','C1','admi1234','Artificial Intelligence');
+INSERT INTO RESERVATION VALUES (1,'2021-09-28 08:00:00','2021-09-28 10:00:00','3018','C1','guea0902','Seance detude');
+INSERT INTO RESERVATION VALUES (2,'2021-09-29 08:00:00','2021-09-29 10:00:00','1007','C1','guea0902','Seance detude');
+INSERT INTO RESERVATION VALUES (56,'2021-09-28 10:15:00','2021-09-28 11:30:00','1007','C1','bour0703','Seance detude');
+INSERT INTO RESERVATION VALUES (22,'2021-09-28 11:45:00','2021-09-28 12:45:00','1007','C1','admi1234','test');
+INSERT INTO RESERVATION VALUES (3,'2021-09-28 08:30:00','2021-09-28 10:00:00','2018','C1','bour0703','Revision');
+INSERT INTO RESERVATION VALUES (4,'2021-09-28 09:00:00','2021-09-28 10:00:00','3002','D7','beab1234','Tutorat');
+INSERT INTO RESERVATION VALUES (5,'2021-09-28 10:00:00','2021-09-28 12:00:00','3002','D7','admi1234','Test');
+INSERT INTO RESERVATION VALUES (6,'2021-09-28 11:00:00','2021-09-28 15:00:00','4019','C1','admi1234','Test2');
+INSERT INTO RESERVATION VALUES (8,'2021-09-28 10:30:00','2021-09-28 12:00:00','5012','C1','admi1234','Machine Learning',1);
+INSERT INTO RESERVATION VALUES (11,'2021-09-28 10:30:00','2021-09-28 12:00:00','5012','C1','admi1234','Machine Learning',2);
 --INSERT INTO RESERVATION VALUES (34,'2021-09-28 11:00:00','2021-09-28 15:00:00','4019','C1','admi1234','Artificial Intelligence');
 --INSERT INTO RESERVATION VALUES (7,'2021-09-28 10:30:00','2021-09-28 16:00:00','4023','C1','admi1234','Machine Learning');
 --INSERT INTO RESERVATION VALUES (8,'2021-09-28 12:00:00','2021-09-28 18:45:00','3035','C1','admi1234','Personalization');
 UPDATE RESERVATION SET id_locaux = 2018 WHERE id_reservation = '2';
 DELETE FROM RESERVATION WHERE id_reservation = '6';
 
-INSERT INTO RESERVATION VALUES (8,'2021-09-28 10:30:00','2021-09-28 12:00:00','5012','C1','admi1234','Machine Learning',1);
-INSERT INTO RESERVATION VALUES (11,'2021-09-28 10:30:00','2021-09-28 12:00:00','5012','C1','admi1234','Machine Learning',2);
---INSERT INTO RESERVATION VALUES (9,'2021-09-28 8:00:00','2021-09-28 10:00:00','1007','C1','guea0902','Net Neutrality');
+
+--Test dechec de reservation
+--Conflit d'horaire normal
+--INSERT INTO RESERVATION VALUES (9,'2021-09-28 9:00:00','2021-09-28 11:00:00','1007','C1','guea0902','Net Neutrality');
+--Conflit d'horaire cubicule
+--INSERT INTO RESERVATION VALUES (96,'2021-09-28 11:30:00','2021-09-28 12:45:00','5012','C1','admi1234','Machine Learning',2);
+--Reservation de plus de 4 heures
+--INSERT INTO RESERVATION VALUES (67,'2021-09-28 1:00:00','2021-09-28 7:00:00','1007','C1','guea0902','Net Neutrality');
+
