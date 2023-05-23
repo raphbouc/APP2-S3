@@ -19,7 +19,7 @@ BEGIN
         END IF;
 
         INSERT INTO log(id_log, description, date, id_locaux, id_pavillon, cip)
-        VALUES(DEFAULT, 'Reservation creee', CURRENT_DATE, new.id_locaux, new.id_pavillon, new.cip);
+        VALUES(DEFAULT, 'Reservation creee', CURRENT_TIMESTAMP, new.id_locaux, new.id_pavillon, new.cip);
         RETURN NEW;
     ELSIF TG_OP = 'UPDATE' THEN
         IF EXISTS (
@@ -38,7 +38,7 @@ BEGIN
                 RAISE EXCEPTION 'La durée de réservation doit être inférieure ou égale à 4 heures.';
             END IF;
         INSERT INTO log(id_log, description, date, id_locaux, id_pavillon, cip)
-        VALUES(DEFAULT, 'Reservation updatee', CURRENT_DATE, new.id_locaux, new.id_pavillon, new.cip);
+        VALUES(DEFAULT, 'Reservation updatee', CURRENT_TIMESTAMP, new.id_locaux, new.id_pavillon, new.cip);
 --         UPDATE log
 --         SET description = 'Update de la reservation', date = CURRENT_DATE
 --         WHERE id_locaux = new.id_locaux AND id_pavillon = new.id_pavillon;
@@ -55,7 +55,7 @@ CREATE OR REPLACE FUNCTION procedure_reservation_delete()
     RETURNS TRIGGER AS $$
 BEGIN
     INSERT INTO log(id_log,description, date, id_locaux, id_pavillon, cip)
-    VALUES(DEFAULT,'Reservation annule', CURRENT_DATE, old.id_locaux, OLD.id_pavillon, old.cip);
+VALUES(DEFAULT,'Reservation annule', CURRENT_TIMESTAMP, old.id_locaux, OLD.id_pavillon, old.cip);
     RETURN new;
 END;
 $$ LANGUAGE plpgsql;
