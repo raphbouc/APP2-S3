@@ -113,8 +113,10 @@ CREATE TABLE LOG
     id_Locaux VARCHAR(32) NOT NULL,
     id_Pavillon VARCHAR(32) NOT NULL,
     Cip VARCHAR(16) NOT NULL,
+    numCubicule INT,
     PRIMARY KEY (id_Log),
     FOREIGN KEY (Cip) REFERENCES MEMBRE(Cip),
+    FOREIGN KEY (numCubicule, id_Locaux, id_Pavillon) REFERENCES CUBICULE(numCubicule, id_Locaux, id_Pavillon),
     FOREIGN KEY (id_Locaux, id_Pavillon) REFERENCES local(id_Locaux, id_pavillon)
 );
 
@@ -139,9 +141,4 @@ CREATE TABLE StatutMembre
     FOREIGN KEY (Cip) REFERENCES MEMBRE(Cip)
 );
 
-ALTER TABLE LOG
-    ADD CONSTRAINT log_id_reservation_fkey
-        FOREIGN KEY (id_Locaux, id_Pavillon)
-            REFERENCES LOCAL (id_Locaux, id_pavillon)
-            ON DELETE CASCADE;
 

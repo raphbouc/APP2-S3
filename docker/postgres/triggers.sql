@@ -18,8 +18,8 @@ BEGIN
             RAISE EXCEPTION 'La durée de réservation doit être inférieure ou égale à 4 heures.';
         END IF;
 
-        INSERT INTO log(id_log, description, date, id_locaux, id_pavillon, cip)
-        VALUES(DEFAULT, 'Reservation creee', CURRENT_DATE, new.id_locaux, new.id_pavillon, new.cip);
+        INSERT INTO log(id_log, description, date, id_locaux, numcubicule, id_pavillon, cip)
+        VALUES(DEFAULT, 'Reservation creee', CURRENT_DATE, new.id_locaux, new.numcubicule, new.id_pavillon, new.cip);
         RETURN NEW;
     ELSIF TG_OP = 'UPDATE' THEN
         IF EXISTS (
@@ -37,8 +37,8 @@ BEGIN
             IF (NEW.date_fin - NEW.date_debut) > INTERVAL '4 hours' THEN
                 RAISE EXCEPTION 'La durée de réservation doit être inférieure ou égale à 4 heures.';
             END IF;
-        INSERT INTO log(id_log, description, date, id_locaux, id_pavillon, cip)
-        VALUES(DEFAULT, 'Reservation updatee', CURRENT_DATE, new.id_locaux, new.id_pavillon, new.cip);
+        INSERT INTO log(id_log, description, date, id_locaux, numcubicule, id_pavillon, cip)
+        VALUES(DEFAULT, 'Reservation updatee', CURRENT_DATE, new.id_locaux, new.numcubicule, new.id_pavillon, new.cip);
 --         UPDATE log
 --         SET description = 'Update de la reservation', date = CURRENT_DATE
 --         WHERE id_locaux = new.id_locaux AND id_pavillon = new.id_pavillon;
